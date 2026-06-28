@@ -2,7 +2,7 @@ import React from 'react'
 
 const XboxController = ({ buttons, axes, vibrating }) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="100vh" height="80vh" version="1.1" viewBox="0 -45 200 200">
+        <svg xmlns="http://www.w3.org/2000/svg" className='w-full h-fit lg:w-[100vh] lg:h-[80vh]'  version="1.1" viewBox="0 -45 200 200">
             <g transform="matrix(.32978 0 0 .32978 103.66 -1.2829)" strokeWidth="3.0323">
 
                 {/* Left Trigger */}
@@ -28,7 +28,7 @@ const XboxController = ({ buttons, axes, vibrating }) => {
                 <g transform="translate(-166, -25) scale(0.9)">
                     <path d="m61.598 50s2.3172 1e-6 3.815-1.768 1.117-4.0537 1.117-4.0537l-2.9524-17.711s-0.49076-2.9453-2.516-5.1393-4.922-2.9184-4.922-2.9184l-37.625-9.0888s-2.733-0.74932-5.6239 0.22637c-2.8908 0.97568-4.6108 3.2279-4.6108 3.2279l-2.9909 3.7386s-1.3081 1.6351-1.8684 3.7263-0.098956 4.6922-0.098956 4.6922l3.482 20.89s0.3013 1.8083 1.7001 2.9932c1.3987 1.185 3.232 1.185 3.232 1.185z"
                         fill={buttons[4].pressed ? "#000" : '#fff'}
-                        stroke="#000" stroke-width="5" />
+                        stroke="#000" strokeWidth="5" />
                 </g>
 
 
