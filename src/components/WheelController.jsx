@@ -3,9 +3,9 @@ import Wheel from "./Wheel"
 const WheelController = ({ axes, buttons }) => {
 
     return (
-        <div className='flex flex-col items-center justify-between w-full h-full p-4 gap-2'>
+        <div className='flex flex-col items-center w-[100vh] h-[80vh]'>
             <Wheel axes={axes} />
-            <div className="flex flex-col-reverse lg:flex-row-reverse justify-between items-center w-full p-2 gap-5">
+            <div className="flex flex-row-reverse justify-between items-center w-full p-2">
                 <div className='flex gap-6 mt-6 p-8 justify-center items-center'>
 
                     <div className='flex flex-col items-center gap-2'>

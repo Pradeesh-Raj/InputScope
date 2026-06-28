@@ -1,11 +1,11 @@
+import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import Controller from './components/Controller';
 import ErrorBoundary from './components/ErrorBoundary';
-import Footer from './components/Footer';
 import './css/App.css';
 import controllerLogo from './assets/game-controller.png';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const App = () => {
   const SLOTS = [0, 1, 2, 3]
@@ -15,11 +15,12 @@ const App = () => {
 
   useEffect(() => {
     function handleConnect(e) {
-      console.log(e)
+      console.log(e);
       setGamepads((prev) => [...prev, e.gamepad]);
     }
 
     function handleDisconnect(e) {
+      console.log(e);
       setGamepads((prev) => {
         const updated = prev.filter((gamepad) => gamepad.index !== e.gamepad.index);
         if (e.gamepad.index === activeIndex && updated.length > 0) {
@@ -48,20 +49,20 @@ const App = () => {
     }
   }, [])
   return (
-    <div className='flex flex-col justify-evenly gap-2.5 p-3 h-full'>
-      <nav className='flex p-2 lg:p-3 items-center justify-between w-full border-b border-white/40'>
+    <div className='p-3 h-screen'>
+      <nav className='flex p-4 items-center justify-between w-full border-b border-white/40'>
         <div className='flex items-center gap-3'>
-          <img src={controllerLogo} className='w-5 h-5 lg:w-8 lg:h-8'></img>
-          <h1 className='text-lg md:text-xl lg:text-3xl font-bold lg:tracking-wide'>Input Scope</h1>
+          <img src={controllerLogo} className='w-8 h-8'></img>
+          <h1 className='text-3xl font-bold tracking-wide'>Controller Checker</h1>
         </div>
         <div>
-          <a href='https://github.com/Pradeesh-Raj/InputScope' className='text-sm lg:text-xl hover:text-zinc-500 transition-colors'>
-            <FontAwesomeIcon icon={faGithub} className='text-2xl' />
+          <a>
+            <FontAwesomeIcon icon={faGithub} className='text-2xl'/>
           </a>
         </div>
       </nav>
       <ErrorBoundary>
-        <div className='grid grid-cols-2 grid-rows-2 lg:flex lg:justify-center gap-2 m-2'>
+        <div className='flex justify-center gap-2 m-2'>
           {SLOTS.map((slot) => {
             const gp = gamepads.find((g) => g.index === slot)
             const isActive = activeIndex === slot
@@ -83,12 +84,10 @@ const App = () => {
             )
           })}
         </div>
-        <div className='lg:flex lg:justify-center'>
+        <div className='content flex justify-center items-center'>
           <Controller gamePad={gamepads.find(gp => gp.index === activeIndex) || null} />
         </div>
-
       </ErrorBoundary>
-      <Footer />
     </div>
   )
 }
