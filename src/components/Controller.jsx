@@ -6,6 +6,11 @@ import BrokenController from '../assets/no-Connection.png'
 import WheelController from './WheelController';
 
 const Controller = ({ gamePad }) => {
+    const [vibrating, setVibrating] = useState({
+        left: false,
+        right: false,
+    });
+    
     if (gamePad == null) {
         return (
             <>
@@ -17,7 +22,6 @@ const Controller = ({ gamePad }) => {
         )
     }
 
-    const [vibrating, setVibrating] = useState(false)
     const axes = gamePad.axes;
     const buttons = gamePad.buttons;
 

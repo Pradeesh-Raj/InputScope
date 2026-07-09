@@ -71,7 +71,7 @@ const XboxController = ({ buttons, axes, vibrating }) => {
                 <path id="btn-a" d="m149.07 169.91h-4.6482l-8.8957 22.039h5.3962l1.6296-4.4078h8.3882l1.6295 4.4078h5.3962zm0.16029 13.223h-4.9688l2.4577-6.4113h0.0534z" fill={buttons[0].pressed ? '#14ff04' : '#ffffff'} strokeWidth=".8023" />
                 <path id="Start" fill={buttons[9].pressed ? "#26e13f" : "#fff"} d="m36.395 136.6a1.0001 1.0001 0 1 0 0 1.9999h12.019a1.0001 1.0001 0 1 0 0-1.9999zm0 3.7186a1.0001 1.0001 0 1 0 0 1.9999h12.019a1.0001 1.0001 0 1 0 0-1.9999zm0 3.7181a1.0001 1.0001 0 1 0 0 1.9999h12.019a1.0001 1.0001 0 1 0 0-1.9999z" color="#000000" colorRendering="auto" dominantBaseline="auto" enableBackground="accumulate" imageRendering="auto" shapeRendering="auto" solid-color="#000000" />
                 <path d="m0.29297 62.172c-12.385 0-22.445 10.06-22.445 22.445s10.06 22.447 22.445 22.447 22.447-10.062 22.447-22.447-10.062-22.445-22.447-22.445zm0 2c11.304 0 20.447 9.1409 20.447 20.445 0 11.304-9.1428 20.447-20.447 20.447-11.304 0-20.445-9.1428-20.445-20.447 0-11.304 9.1409-20.445 20.445-20.445z" color="#000000" colorRendering="auto" dominantBaseline="auto" enableBackground="accumulate" fill="#c0c0c0" imageRendering="auto" shapeRendering="auto" solid-color="#000000" />
-                {vibrating && (
+                {vibrating.left && (
                     <g transform="translate(-200, 300)">
                         <circle cx="0" cy="0" r="10" stroke="#4f8ef7" strokeWidth="3" fill="none">
                             <animate attributeName="r" values="10;50" dur="1s" repeatCount="indefinite" />
@@ -88,7 +88,7 @@ const XboxController = ({ buttons, axes, vibrating }) => {
                     </g>
                 )}
 
-                {vibrating && (
+                {vibrating.right && (
                     <g transform="translate(200, 300)">
                         <circle cx="0" cy="0" r="10" stroke="#4f8ef7" strokeWidth="3" fill="none">
                             <animate attributeName="r" values="10;50" dur="1s" repeatCount="indefinite" />

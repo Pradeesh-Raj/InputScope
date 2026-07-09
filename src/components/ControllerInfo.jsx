@@ -2,6 +2,14 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from 'react';
 
 const ControllerInfo = ({ gamePad, vibrating, onVibrate }) => {
+    const pattern = /^(?<controllerName>.*?)\s*\(.*?Vendor:\s*(?<vendorID>[0-9a-fA-F]+)\s+Product:\s*(?<productID>[0-9a-fA-F]+).*?\)$/;
+    const ID = gamePad.id.match(pattern);
+    let vendorID, productID, controllerName;
+    if (ID) {
+        vendorID = ID.groups.vendorID;
+        productID = ID.groups.productID;
+        controllerName = ID.groups.controllerName;
+    }
 
     function triggerVibration(effectType, effectTrigger) {
         if (!gamePad.vibrationActuator) return
@@ -16,24 +24,37 @@ const ControllerInfo = ({ gamePad, vibrating, onVibrate }) => {
             });
         }
 
-        if (effectType === 'trigger-rumble' && effectTrigger) {
-            onVibrate(true);
-            if (effectTrigger === 'left') {
+        if (effectType === 'trigger-rumble') {
+
+            if (!effectTrigger) {
+                onVibrate({ left: true, right: true })
+                rumble(effectType, { leftTrigger: 1.0, rightTrigger: 1.0 })
+            }
+            else if (effectTrigger === 'left') {
+                onVibrate({ ...vibrating, left: true });
                 rumble(effectType, { leftTrigger: 1.0, rightTrigger: 0 });
             }
-            else rumble(effectType, { rightTrigger: 1.0, leftTrigger: 0 });
-            setTimeout(() => onVibrate(false), 2000)
+            else {
+                onVibrate({ ...vibrating, right: true });
+                rumble(effectType, { rightTrigger: 1.0, leftTrigger: 0 });
+            }
+            setTimeout(() => onVibrate({ left: false, right: false }), 2000)
         }
         else {
-            onVibrate(true)
+            onVibrate({ left: true, right: true })
             rumble(effectType, {});
-            setTimeout(() => onVibrate(false), 2000)
+            setTimeout(() => onVibrate({ left: false, right: false }), 2000)
         }
     }
 
     return (
         <div className="w-full h-full bg-white/20 shadow-lg shadow-black/10 rounded-xl border border-zinc-800 p-5 flex flex-col gap-5">
-            <h1 className='text-2xl font-bold'> {gamePad.id.split("(")[0]}</h1>
+            <div className='flex flex-col gap-2'>
+                {/* <h1 className='text-2xl font-bold'> {gamePad.id.split("(")[0]}</h1> */}
+                <h1 className='text-2xl font-bold'> {controllerName || gamePad.id}</h1>
+                {ID && <p className='text-xs'>VENDOR ID: {vendorID} PRODUCT ID: {productID} </p>}
+            </div>
+
             <div className={`flex justify-center items-center gap-2 border-2 rounded-full ${gamePad.connected ? 'border-green-400' : 'border-red-500'}  w-fit pt-2 pb-2 pl-3 pr-3`}>
                 <div className={`w-2 h-2 ${gamePad.connected ? 'bg-green-400' : 'bg-red-500'} rounded-full`}></div>
                 <p>{gamePad.connected ? "Connected" : "Not connected"}</p>
@@ -74,39 +95,36 @@ const ControllerInfo = ({ gamePad, vibrating, onVibrate }) => {
                 <>
                     <button
                         onClick={() => triggerVibration(gamePad.vibrationActuator.type, null)}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${vibrating
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${vibrating.left && vibrating.right
                             ? 'bg-blue-500 text-white'
                             : 'bg-zinc-800 border border-green-400 text-zinc-300 hover:bg-zinc-700'
                             } cursor-pointer`}
                     >
-                        {vibrating ? 'Vibrating...' : 'Test Vibration'}
+                        {(vibrating.left && vibrating.right) ? 'Vibrating...' : 'Test Vibration'}
                     </button>
-                    {gamePad.vibrationActuator.type === 'trigger-rumble' ? (
-                        <div className='flex justify-between'>
+                    {gamePad.vibrationActuator.type === 'trigger-rumble' && (
+                        <div className='flex gap-2'>
                             <button
                                 onClick={() => triggerVibration('trigger-rumble', 'left')}
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${vibrating
+                                className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-all ${vibrating.left
                                     ? 'bg-blue-500 text-white'
                                     : 'bg-zinc-800 border border-green-400 text-zinc-300 hover:bg-zinc-700'
                                     } cursor-pointer`}
                             >
-                                {vibrating ? 'Vibrating...' : 'Left trigger'}
+                                {vibrating.left ? 'Vibrating...' : 'Left trigger'}
                             </button>
                             <button
                                 onClick={() => triggerVibration('trigger-rumble', 'right')}
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${vibrating
+                                className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-all ${vibrating.right
                                     ? 'bg-blue-500 text-white'
                                     : 'bg-zinc-800 border border-green-400 text-zinc-300 hover:bg-zinc-700'
                                     } cursor-pointer`}
                             >
-                                {vibrating ? 'Vibrating...' : 'Right Trigger'}
+                                {vibrating.right ? 'Vibrating...' : 'Right Trigger'}
                             </button>
                         </div>
-                    ) : (
-                        <></>
                     )}
                 </>
-
             )}
         </div>
     )

@@ -1,16 +1,36 @@
-# React + Vite
+# Input Scope
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Input Scope is a web-based controller testing tool built with React. It uses the browser Gamepad API to detect connected controllers and display real-time input data such as buttons, axes, vibration support, and controller status.
 
-Currently, two official plugins are available:
+Input scope is useful for testing gamepads, racing wheels, virtual controllers, and other Gamepad API-compatible devices directly from the browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Detects connected controllers using the Gamepad API
+- Displays controller name, connection status, button count, and axes
+- Shows live button press and axis movement updates
+- Supports standard gamepad and racing wheel style layouts
+- Detects vibration support and available vibration effects
+- Provides controller slot selection for multiple connected devices
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- JavaScript
+- Tailwind CSS
+- Gamepad API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Contributing
+
+Contributions are welcome.
+
+If you find a bug, have an idea for improvement, or want to suggest better controller support, feel free to raise an issue.
+
+Developers can open issues for:
+
+- Bug reports
+- UI improvements
+- Better controller layouts
+- New device support
+- Gamepad API compatibility fixes
+- Vibration and haptics improvements

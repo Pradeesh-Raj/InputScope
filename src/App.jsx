@@ -8,6 +8,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const App = () => {
+
   const SLOTS = [0, 1, 2, 3]
   const [activeIndex, setActiveIndex] = useState(0);
   const [gamepads, setGamepads] = useState([]);
