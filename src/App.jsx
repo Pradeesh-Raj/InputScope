@@ -6,7 +6,7 @@ import './css/App.css';
 import controllerLogo from './assets/game-controller.png';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
 
@@ -91,6 +91,7 @@ const App = () => {
 
       </ErrorBoundary>
       <Footer />
+      <Analytics />
     </div>
   )
 }
