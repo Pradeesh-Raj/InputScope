@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import XboxController from './XboxController';
 import ControllerInfo from './ControllerInfo';
-import BrokenController from '../assets/no-Connection.png'
+import BrokenController from '../assets/no-connection.png'
 import WheelController from './WheelController';
 
 const Controller = ({ gamePad }) => {
