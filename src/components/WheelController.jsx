@@ -47,7 +47,7 @@ const WheelController = ({ axes, buttons }) => {
                         Steering Angle
                     </h1>
                     <div className="text-xl font-semibold">
-                        {(axes[0] * 180).toFixed(0)}&#176;
+                        {(axes[0] * 360).toFixed(0)}&#176;
                     </div>
                 </div>
 
